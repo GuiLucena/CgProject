@@ -6,24 +6,155 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>747</width>
-    <height>495</height>
+    <width>460</width>
+    <height>373</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="MyGlWidget" name="QglWidget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>731</width>
-      <height>471</height>
-     </rect>
-    </property>
-   </widget>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <layout class="QFormLayout" name="formLayout">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetFixedSize</enum>
+      </property>
+      <property name="rowWrapPolicy">
+       <enum>QFormLayout::DontWrapRows</enum>
+      </property>
+      <property name="horizontalSpacing">
+       <number>6</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
+       <widget class="QLabel" name="tamMatrizLabel">
+        <property name="text">
+         <string>Tam. Matriz</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QSpinBox" name="tamMatrizSpinBox">
+        <property name="minimum">
+         <number>2</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="xInitLabel">
+        <property name="text">
+         <string>X Init.</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QSpinBox" name="xInitSpinBox"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="yInitLabel">
+        <property name="text">
+         <string>y init</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QSpinBox" name="yInitSpinBox"/>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="xFinLabel">
+        <property name="text">
+         <string>x fin.</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QSpinBox" name="xFinSpinBox"/>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="yFinLabel">
+        <property name="text">
+         <string>y fin.</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QSpinBox" name="yFinSpinBox"/>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="dDALabel">
+        <property name="text">
+         <string>DDA</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QCheckBox" name="dDACheckBox"/>
+      </item>
+      <item row="6" column="0">
+       <widget class="QLabel" name="midPointLabel">
+        <property name="text">
+         <string>Mid. Point</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QCheckBox" name="midPointCheckBox"/>
+      </item>
+      <item row="7" column="0">
+       <widget class="QLabel" name="lineEqLabel">
+        <property name="text">
+         <string>Line Eq.</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1">
+       <widget class="QCheckBox" name="lineEqCheckBox"/>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="meshLabel">
+        <property name="text">
+         <string>Mesh</string>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="1">
+       <widget class="QCheckBox" name="meshCheckBox"/>
+      </item>
+      <item row="9" column="0">
+       <widget class="QLabel" name="origLineLabel">
+        <property name="text">
+         <string>Orig. Line</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <widget class="QCheckBox" name="origLineCheckBox"/>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="MyGlWidget" name="QglWidget" native="true">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>300</width>
+        <height>0</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
@@ -33,8 +164,181 @@
    <extends>QWidget</extends>
    <header>myglwidget.h</header>
    <container>1</container>
+   <slots>
+    <slot>changeMatrizSize(int)</slot>
+    <slot>updateXInit(int)</slot>
+    <slot>updateYInit(int)</slot>
+    <slot>updateXFin(int)</slot>
+    <slot>updateYFin(int)</slot>
+    <slot>enableDDA(bool)</slot>
+    <slot>enableMidlePoint(bool)</slot>
+    <slot>enableLineEq(bool)</slot>
+    <slot>enableMesh(bool)</slot>
+    <slot>enableOrigLine(bool)</slot>
+   </slots>
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>tamMatrizSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>QglWidget</receiver>
+   <slot>changeMatrizSize(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>117</x>
+     <y>27</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>204</x>
+     <y>65</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>xInitSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>QglWidget</receiver>
+   <slot>updateXInit(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>111</x>
+     <y>59</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>229</x>
+     <y>50</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>yInitSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>QglWidget</receiver>
+   <slot>updateYInit(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>129</x>
+     <y>88</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>178</x>
+     <y>94</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>xFinSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>QglWidget</receiver>
+   <slot>updateXFin(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>126</x>
+     <y>128</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>170</x>
+     <y>128</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>yFinSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>QglWidget</receiver>
+   <slot>updateYFin(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>128</x>
+     <y>153</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>189</x>
+     <y>158</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>dDACheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>QglWidget</receiver>
+   <slot>enableDDA(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>122</x>
+     <y>180</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>201</x>
+     <y>188</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>midPointCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>QglWidget</receiver>
+   <slot>enableMidlePoint(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>118</x>
+     <y>210</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>165</x>
+     <y>216</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>lineEqCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>QglWidget</receiver>
+   <slot>enableLineEq(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>117</x>
+     <y>239</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>176</x>
+     <y>243</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>meshCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>QglWidget</receiver>
+   <slot>enableMesh(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>114</x>
+     <y>269</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>204</x>
+     <y>269</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>origLineCheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>QglWidget</receiver>
+   <slot>enableOrigLine(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>102</x>
+     <y>295</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>222</x>
+     <y>303</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
