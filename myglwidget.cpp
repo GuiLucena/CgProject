@@ -208,17 +208,22 @@ void MyGlWidget::DDA(int X1,int Y1,int X2, int Y2)
         Length = abs(Y2-Y1);
     }
     if(Length == 0)
-        return;
-    Xinc = (X2 - X1)/(float)Length;
-    Yinc = (Y2 -Y1)/(float)Length;
-    X = X1;
-    Y = Y1;
-
-    while((*actualPlace)<=(*end))
     {
-        setpixel(Round(X),Round(Y));
-        X = X + Xinc;
-        Y = Y + Yinc;
+        setpixel(0,0);
+    }
+    else
+    {
+        Xinc = (X2 - X1)/(float)Length;
+        Yinc = (Y2 -Y1)/(float)Length;
+        X = X1;
+        Y = Y1;
+
+        while((*actualPlace)<=(*end))
+        {
+            setpixel(Round(X),Round(Y));
+            X = X + Xinc;
+            Y = Y + Yinc;
+        }
     }
 }
 
@@ -309,7 +314,7 @@ void MyGlWidget::lineEquation(int x1,int y1,int x2, int y2)
         b = y1 - (inc*x1);
         if(inc <= 1)
         {
-            while(x <x2)
+            while(x <= x2)
             {
                 y = (inc*x) + b;
                 setpixel(Round(x),Round(y));
@@ -318,7 +323,7 @@ void MyGlWidget::lineEquation(int x1,int y1,int x2, int y2)
         }
         else
         {
-            while(y <y2)
+            while(y <= y2)
             {
                 x = (y-b)/ inc;
                 setpixel(Round(x),Round(y));
